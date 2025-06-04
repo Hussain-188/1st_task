@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>JS Auth & CRUD App</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Login/Register Section -->
+    <div id="authSection">
+        <div class="auth-container">
+            <!-- Login Form -->
+            <div id="loginForm">
+                <h2 class="text-center mb-4">Welcome Back</h2>
+                <form id="loginFormElement">
+                    <div class="mb-3">
+                        <label for="loginEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="loginEmail" required>
+                        <div class="error-message" id="loginEmailError"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" required>
+                        <div class="error-message" id="loginPasswordError"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <span class="loading spinner-border spinner-border-sm me-2" role="status"></span>
+                        Sign In
+                    </button>
+                    <div class="text-center mt-3">
+                        <a href="#" id="showRegister">Don't have an account? Register</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Registration Form -->
+            <div id="registerForm" class="hidden">
+                <h2 class="text-center mb-4">Create Account</h2>
+                <form id="registerFormElement">
+                    <div class="mb-3">
+                        <label for="registerEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="registerEmail" required>
+                        <div class="error-message" id="registerEmailError"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="registerPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="registerPassword" required>
+                        <div class="error-message" id="registerPasswordError"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <span class="loading spinner-border spinner-border-sm me-2" role="status"></span>
+                        Register
+                    </button>
+                    <div class="text-center mt-3">
+                        <a href="#" id="showLogin">Already have an account? Sign In</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboardSection" class="hidden">
+        <div class="dashboard-container">
+            <!-- Header -->
+            <div class="header">
+                <div class="user-info">
+                    <img id="userAvatar" src="" alt="User Avatar" class="user-avatar">
+                    <div>
+                        <h5 id="userName" class="mb-0">Loading...</h5>
+                        <small class="opacity-75">Welcome to your dashboard</small>
+                    </div>
+                </div>
+                <button class="btn btn-outline-light" id="logoutBtn">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </button>
+            </div>
+
+            <!-- Posts Section -->
+            <div class="posts-section">
+                <h3 class="mb-4">Posts Management</h3>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Body</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="postsTableBody">
+                            <tr>
+                                <td colspan="4" class="text-center">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Post Modal -->
+    <div class="modal fade" id="viewPostModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">View Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Title:</h6>
+                    <p id="viewPostTitle"></p>
+                    <h6>Body:</h6>
+                    <p id="viewPostBody"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Post Modal -->
+    <div class="modal fade" id="editPostModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editPostForm">
+                        <div class="mb-3">
+                            <label for="editPostTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="editPostTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editPostBody" class="form-label">Body</label>
+                            <textarea class="form-control" id="editPostBody" rows="4" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="savePostBtn">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
